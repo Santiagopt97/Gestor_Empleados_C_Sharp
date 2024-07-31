@@ -15,10 +15,10 @@ namespace Gestor_Empleados.Models
         public string Posicion { get; set; }
         public double Salario { get; set; }
 
-        private void CalcularBonificacion(){
+        private double CalcularBonificacion(){
             var bonificacion = Salario * 0.10;
             var salarioConBonificacion = Salario + bonificacion;
-            Console.WriteLine($"El salario con bonificacion del empleado {Nombre} {Apellido} es de: {salarioConBonificacion:c}");
+            return salarioConBonificacion;
         }
 
         public void MostrarInformacion(){
@@ -30,10 +30,9 @@ namespace Gestor_Empleados.Models
             Numero de Identificacion: {NumeroDeIdentificacion}
             Edad: {Edad} años
             Posicion: {Posicion}
-            ");
+            Salario con bonificacion: {CalcularBonificacion():c}");
             CalcularBonificacion();
             Console.WriteLine("----------------------------------------");
         }
-
     }
 }
