@@ -31,7 +31,6 @@ namespace Gestor_Empleados.Models
             Edad: {Edad} años
             Posicion: {Posicion}
             Salario con bonificacion: {CalcularBonificacion():c}");
-            CalcularBonificacion();
             Console.WriteLine("----------------------------------------");
         }
     }
