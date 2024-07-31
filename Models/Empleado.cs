@@ -18,11 +18,11 @@ namespace Gestor_Empleados.Models
         public Empleado(string nombre, string apellido, string numeroDeIdentificacion, byte edad, string posicion, double salario)
         {
             Id = Guid.NewGuid();
-            Nombre = nombre;
-            Apellido = apellido;
+            Nombre = nombre.ToLower();
+            Apellido = apellido.ToLower();
             NumeroDeIdentificacion = numeroDeIdentificacion;
             Edad = edad;
-            Posicion = posicion;
+            Posicion = posicion.ToLower();
             Salario = salario;
         }
 
