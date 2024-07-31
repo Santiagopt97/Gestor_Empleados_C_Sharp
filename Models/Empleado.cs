@@ -15,6 +15,17 @@ namespace Gestor_Empleados.Models
         public string Posicion { get; set; }
         public double Salario { get; set; }
 
+        public Empleado(string nombre, string apellido, string numeroDeIdentificacion, byte edad, string posicion, double salario)
+        {
+            Id = Guid.NewGuid();
+            Nombre = nombre;
+            Apellido = apellido;
+            NumeroDeIdentificacion = numeroDeIdentificacion;
+            Edad = edad;
+            Posicion = posicion;
+            Salario = salario;
+        }
+
         private double CalcularBonificacion(){
             var bonificacion = Salario * 0.10;
             var salarioConBonificacion = Salario + bonificacion;
