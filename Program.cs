@@ -27,9 +27,11 @@ void Menu()
         {
             case 1:
                 empresa.AgregarEmpleado(empresa.PedirDatosEmpleado());
+                Pausarmenu();
                 break;
             case 2:
                 empresa.MostrarEmpleados(empresa.ListaEmpleados);
+                Pausarmenu();
                 break;
             case 3:
                 Console.Write("Ingrese el nombre del empleado a eliminar: ");
@@ -37,23 +39,27 @@ void Menu()
                 Console.Write("Ingrese el apellido del empleado a eliminar: ");
                 string apellido = Console.ReadLine().ToLower();
                 empresa.EliminarEmpleado(nombre, apellido);
+                Pausarmenu();
                 break;
             case 4:
                 Console.WriteLine("Actualización de Empleado");
                 Console.Write("Ingrese el numero de documento del empleado a actualizar: ");
                 string documento = Console.ReadLine();
                 empresa.ActualizarEmpleado(documento);
+                Pausarmenu();
                 break;
             case 5:
                 Console.Write("Ingrese el numero de documento del empleado a buscar: ");
                 string documentoBuscar = Console.ReadLine();
                 empresa.BuscarEmpleado(documentoBuscar);
+                Pausarmenu();
                 break;
 
             case 6:
                 Console.Write("Ingrese el cargo del empleado a buscar: ");
                 string cargoBuscar = Console.ReadLine().ToLower();
                 empresa.BuscarEmpleadosPorCargo(cargoBuscar);
+                Pausarmenu();
                 break;
 
             case 0:
@@ -63,6 +69,11 @@ void Menu()
 
         }
     }
+}
+
+void Pausarmenu(){
+    Console.WriteLine("Presione cualquier tecla para continuar...");
+    Console.ReadKey();
 }
 
 Menu();
