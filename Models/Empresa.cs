@@ -10,6 +10,7 @@ namespace Gestor_Empleados.Models
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public List<Empleado> ListaEmpleados = new List<Empleado>();
+        public List<Cliente> ListaClientes = new List<Cliente>();
 
         public Empresa(string nombre, string direccion)
         {
@@ -31,7 +32,7 @@ namespace Gestor_Empleados.Models
             Console.Write("Posicion: ");
             string posicion = Console.ReadLine();
             Console.Write("Salario: ");
-            double salario = Convert.ToDouble(Console.ReadLine());
+            decimal salario = Convert.ToDecimal(Console.ReadLine());
 
             return new Empleado(nombre, apellido, documento, edad, posicion, salario);
         }
@@ -109,7 +110,7 @@ namespace Gestor_Empleados.Models
                         break;
                     case 6:
                         Console.Write("Nuevo salario: ");
-                        empleadoAModificar.Salario = Convert.ToDouble(Console.ReadLine());
+                        empleadoAModificar.Salario = Convert.ToDecimal(Console.ReadLine());
                         break;
                     default:
                         Console.WriteLine("Opcion invalida.");
@@ -119,9 +120,10 @@ namespace Gestor_Empleados.Models
             }
         }
 
-        public void BuscarEmpleado(string numeroDeIdentificacion){
+        public void BuscarEmpleado(string numeroDeIdentificacion)
+        {
             var empleadoEncontrado = ListaEmpleados.Find(empleado => empleado.NumeroDeIdentificacion == numeroDeIdentificacion);
-            if (empleadoEncontrado!= null)
+            if (empleadoEncontrado != null)
             {
                 empleadoEncontrado.MostrarInformacion();
             }
@@ -131,7 +133,8 @@ namespace Gestor_Empleados.Models
             }
         }
 
-        public void BuscarEmpleadosPorCargo(string posicion){
+        public void BuscarEmpleadosPorCargo(string posicion)
+        {
             Console.WriteLine($"Empleados con la posicion {posicion}:");
             var empleadosPorCargo = ListaEmpleados.FindAll(empleado => empleado.Posicion == posicion);
             foreach (var empleado in empleadosPorCargo)
@@ -139,6 +142,57 @@ namespace Gestor_Empleados.Models
                 empleado.MostrarInformacion();
             }
 
+        }
+
+        public void AgregarCliente(Cliente cliente)
+        {
+            ListaClientes.Add(cliente);
+            Console.WriteLine($"El cliente {cliente.Nombre} {cliente.Apellido} ha sido agregado.");
+        }
+        public Cliente PedirDatosCliente()
+        {
+            Console.WriteLine("Ingrese los datos del cliente:");
+            Console.Write("Nombre: ");
+            string nombre = Console.ReadLine();
+            Console.Write("Apellido: ");
+            string apellido = Console.ReadLine();
+            Console.Write("Numero de documento: ");
+            string documento = Console.ReadLine();
+            Console.Write("Edad: ");
+            byte edad = Convert.ToByte(Console.ReadLine());
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
+            Console.Write("Telefono: ");
+            string telefono = Console.ReadLine();
+
+            return new Cliente(nombre, apellido, documento, edad, email, telefono);
+        }
+
+        public void EliminarCliente(string nombre, string apellido){
+            Console.WriteLine($"Estas seguro que deseas eliminar al Cliente: {nombre} {apellido} (si o no)");
+            string respuesta = Console.ReadLine();
+            if (respuesta.ToLower() == "si")
+            {
+                Cliente clienteAEliminar = ListaClientes.Find(e => e.Nombre == nombre && e.Apellido == apellido);
+                if (clienteAEliminar != null)
+                {
+                    ListaClientes.Remove(clienteAEliminar);
+                    Console.WriteLine($"El ciente {nombre} {apellido} ha sido eliminado.");
+                }
+                else
+                {
+                    Console.WriteLine($"El ciente {nombre} {apellido} no se encuentra en la lista.");
+                }
+            }
+        }
+
+        public void MostrarClientes(List<Cliente> listaClientes)
+        {
+            Console.WriteLine("Clientes de la empresa: ");
+            foreach (var cliente in listaClientes)
+            {
+                cliente.MostrarInformacion();
+            }
         }
     }
 }
